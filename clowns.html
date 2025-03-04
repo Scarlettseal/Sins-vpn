@@ -32,19 +32,10 @@
             color: #fff;
             text-align: center;
             overflow: hidden;
-        }
-
-        .container {
             position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
         }
 
-        .profile-box {
+        .profile-container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 15px;
@@ -120,17 +111,19 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="profile-box">
-            <div class="profile-image"></div>
-            <div class="profile-name">Xon</div>
-            <div class="profile-bio">
-                Xon, a so-called “competent” skid, thrives on fake IP leaks and empty flexes. Constantly parading around with an inflated ego, they claim to be something they’re not—grasping at relevance with outdated scripts and false threats. Behind the mask, it’s nothing but stolen configs and desperation. Beware of the façade; the only thing real here is the fraud..
-            </div>
-            <a href="your-back-link-here" class="back-button">
-                <i class="fas fa-arrow-left"></i> Back
-            </a>
+    <audio id="background-music" loop autoplay>
+        <source src="fadsfadfasfadsfaf.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="profile-container">
+        <div class="profile-image"></div>
+        <div class="profile-name">Xon</div>
+        <div class="profile-bio">
+            Xon, a so-called “competent” skid, thrives on fake IP leaks and empty flexes. Constantly parading around with an inflated ego, they claim to be something they’re not—grasping at relevance with outdated scripts and false threats. Behind the mask, it’s nothing but stolen configs and desperation. Beware of the façade; the only thing real here is the fraud..
         </div>
+        <a href="your-back-link-here" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </div>
 
     <div class="copyright">&copy; 2025 Clowns. All rights reserved.</div>
