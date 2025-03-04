@@ -18,6 +18,9 @@
     <meta name="twitter:description" content="The future of VPNs is coming soon. Stay tuned for more!">
     <meta name="twitter:image" content="https://i.imgur.com/T7TgAQo.jpeg">
 
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -25,6 +28,7 @@
             box-sizing: border-box;
             cursor: none;
         }
+
         body {
             display: flex;
             justify-content: center;
@@ -37,6 +41,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .cursor-dot {
             position: fixed;
             width: 8px;
@@ -46,6 +51,7 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
         }
+
         .background {
             position: absolute;
             width: 100%;
@@ -53,10 +59,12 @@
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
             animation: pulse 6s infinite ease-in-out;
         }
+
         @keyframes pulse {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
+
         .container {
             position: relative;
             z-index: 2;
@@ -65,6 +73,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .coming-soon {
             font-size: 3.5rem;
             font-weight: bold;
@@ -73,17 +82,12 @@
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
+
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .countdown {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-top: 20px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
+
         .owners-container {
             position: absolute;
             top: 50%;
@@ -95,6 +99,7 @@
             padding: 0 10%;
             perspective: 1000px;
         }
+
         .owner-box {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
@@ -106,9 +111,11 @@
             transition: transform 0.2s ease-out;
             transform-style: preserve-3d;
         }
+
         .owner-box:hover {
             transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
         }
+
         .owner-image {
             width: 100%;
             height: 250px;
@@ -116,34 +123,59 @@
             background-position: center;
             border-radius: 10px;
         }
+
         .owner-name {
             margin-top: 15px;
             font-size: 1.8rem;
             font-weight: bold;
         }
+
+        /* Enhanced Buttons */
         .clown-button, .features-button {
             position: absolute;
-            padding: 10px 20px;
-            background: black;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #6e44ff, #4b2a96);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s, transform 0.2s;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .clown-button {
-            bottom: 20px;
-            left: 20px;
+
+        .clown-button i, .features-button i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
         }
-        .features-button {
-            bottom: 20px;
-            right: 20px;
-        }
+
         .clown-button:hover, .features-button:hover {
-            background: #333;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #8c5aff, #6a3a87);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
+
+        .clown-button i:hover, .features-button i:hover {
+            transform: translateX(5px);
+        }
+
+        .clown-button:active, .features-button:active {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .clown-button .icon, .features-button .icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+        }
+
         .copyright {
             width: 100%;
             font-size: 0.9rem;
@@ -163,9 +195,6 @@
     <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
-        <div class="countdown">
-            <p>Launching in <span id="timer"></span></p>
-        </div>
     </div>
     <div class="owners-container">
         <div class="owner-box" id="scarlett-box">
@@ -177,36 +206,15 @@
             <div class="owner-name">Sin</div>
         </div>
     </div>
-    <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
-    <button class="features-button" onclick="window.location.href='fetures.html'">Features</button>
+    <button class="clown-button" onclick="window.location.href='clowns.html'">
+        <i class="fas fa-users"></i> Clowns
+    </button>
+    <button class="features-button" onclick="window.location.href='features.html'">
+        <i class="fas fa-cogs"></i> Features
+    </button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 
     <script>
-        // Countdown Logic
-        let countdownDate = new Date();
-        countdownDate.setDate(countdownDate.getDate() + 60);  // Adds 60 days from today
-
-        let timer = setInterval(function() {
-            let now = new Date().getTime();
-            let distance = countdownDate - now;
-
-            // Time calculations
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result in the 'timer' element
-            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            // If the countdown is finished, display "EXPIRED"
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("timer").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-
-        // Cursor Effect
         document.addEventListener("mousemove", function(event) {
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
