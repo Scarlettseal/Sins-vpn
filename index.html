@@ -21,6 +21,12 @@
             text-align: center;
             overflow: hidden;
             position: relative;
+            opacity: 0;
+            animation: fadeInPage 1s ease-in-out forwards;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .background {
             position: absolute;
@@ -105,6 +111,9 @@
             background: #333;
             transform: scale(1.1);
         }
+        .clown-button:active {
+            opacity: 0.8;
+        }
         .copyright {
             width: 100%;
             font-size: 0.9rem;
@@ -115,6 +124,14 @@
             text-align: center;
         }
     </style>
+    <script>
+        function navigateToClowns() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'clowns.html';
+            }, 500);
+        }
+    </script>
 </head>
 <body>
     <audio id="bg-music" loop>
@@ -126,15 +143,15 @@
     </div>
     <div class="owners-container">
         <div class="owner-box">
-            <div class="owner-image" style="background-image: url('f08e25d70e91c0614f295f72f71c586a.png');"></div>
+            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
             <div class="owner-name">Scarlett</div>
         </div>
         <div class="owner-box">
-            <div class="owner-image" style="background-image: url('૮˶ᵔ ᗜ ᵔ˶ ྀིა.jpeg');"></div>
+            <div class="owner-image" style="background-image: url('sin.png');"></div>
             <div class="owner-name">Sin</div>
         </div>
     </div>
-    <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
+    <button class="clown-button" onclick="navigateToClowns()">Clowns</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 </body>
 </html>
