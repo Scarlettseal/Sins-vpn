@@ -24,13 +24,13 @@
             position: relative;
         }
         .cursor-dot {
-            position: absolute;
+            position: fixed;
             width: 8px;
             height: 8px;
             background: white;
             border-radius: 50%;
             pointer-events: none;
-            transition: transform 0.1s linear;
+            transform: translate(-50%, -50%);
         }
         .background {
             position: absolute;
@@ -150,7 +150,8 @@
     <script>
         document.addEventListener("mousemove", function(event) {
             let cursor = document.getElementById("cursor-dot");
-            cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+            cursor.style.left = `${event.clientX}px`;
+            cursor.style.top = `${event.clientY}px`;
         });
     </script>
 </body>
