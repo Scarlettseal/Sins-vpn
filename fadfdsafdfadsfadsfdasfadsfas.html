@@ -1,0 +1,25 @@
+<form id="contact-form">
+    <input type="email" name="email" placeholder="Your email" required />
+    <input type="text" name="subject" placeholder="Subject" required />
+    <textarea name="message" placeholder="Your message" required></textarea>
+    <button type="submit">Send</button>
+</form>
+
+<script>
+    document.getElementById("contact-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const response = await fetch("/api/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(formData))
+        });
+
+        if (response.ok) {
+            alert("Email sent!");
+        } else {
+            alert("Failed to send email.");
+        }
+    });
+</script>
