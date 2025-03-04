@@ -32,16 +32,6 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
         }
-        .trail {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.8;
-            transition: transform 0.1s ease-out, opacity 0.2s ease-in-out;
-        }
         .background {
             position: absolute;
             width: 100%;
@@ -65,13 +55,21 @@
             font-size: 3.5rem;
             font-weight: bold;
             opacity: 0;
-            animation: fadeIn 3s ease-in-out forwards;
+            animation: fadeIn 3s ease-in-out forwards, glitch 1.5s infinite;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
         }
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red, -2px -2px blue; }
+            25% { text-shadow: -2px -2px red, 2px 2px blue; }
+            50% { text-shadow: 2px -2px red, -2px 2px blue; }
+            75% { text-shadow: -2px 2px red, 2px -2px blue; }
+            100% { text-shadow: 2px 2px red, -2px -2px blue; }
         }
         .owners-container {
             position: absolute;
@@ -161,14 +159,20 @@
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
-            
-            let trail = document.createElement("div");
-            trail.classList.add("trail");
-            document.body.appendChild(trail);
-            trail.style.left = `${event.clientX}px`;
-            trail.style.top = `${event.clientY}px`;
-            setTimeout(() => trail.style.opacity = "0", 100);
-            setTimeout(() => trail.remove(), 200);
+        });
+        
+        document.querySelectorAll(".owner-box").forEach(box => {
+            box.addEventListener("mousemove", function(event) {
+                let boxRect = box.getBoundingClientRect();
+                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
+                let y = (event.a - boxRect.top - boxRect.height / 2) / 15;
+                box.style.setProperty("--tiltX", `${x}deg`);
+                box.style.setProperty("--tiltY", `${-y}deg`);
+            });
+            box.addEventListener("mouseleave", function() {
+                box.style.setProperty("--tiltX", `0deg`);
+                box.style.setProperty("--tiltY", `0deg`);
+            });
         });
     </script>
 </body>
