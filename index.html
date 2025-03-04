@@ -86,7 +86,7 @@
             transform-style: preserve-3d;
         }
         .owner-box:hover {
-            transform: scale(1.05);
+            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
         }
         .owner-image {
             width: 100%;
@@ -154,12 +154,20 @@
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
-            
-            let x = (window.innerWidth / 2 - event.clientX) / 20;
-            let y = (window.innerHeight / 2 - event.clientY) / 20;
-            
-            document.getElementById("scarlett-box").style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
-            document.getElementById("sin-box").style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
+        });
+        
+        document.querySelectorAll(".owner-box").forEach(box => {
+            box.addEventListener("mousemove", function(event) {
+                let boxRect = box.getBoundingClientRect();
+                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 20;
+                let y = (event.clientY - boxRect.top - boxRect.height / 2) / 20;
+                box.style.setProperty("--tiltX", `${x}deg`);
+                box.style.setProperty("--tiltY", `${-y}deg`);
+            });
+            box.addEventListener("mouseleave", function() {
+                box.style.setProperty("--tiltX", `0deg`);
+                box.style.setProperty("--tiltY", `0deg`);
+            });
         });
     </script>
 </body>
