@@ -132,7 +132,6 @@
             font-weight: bold;
         }
 
-        /* Enhanced Buttons */
         .button-container {
             display: flex;
             flex-direction: column;
@@ -187,6 +186,20 @@
             bottom: 10px;
             text-align: center;
         }
+
+        .bible-verse {
+            font-size: 1.2rem;
+            color: #f7e1b5;
+            margin-top: 20px;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInVerse 2s ease-in-out forwards;
+        }
+
+        @keyframes fadeInVerse {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -198,6 +211,7 @@
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
     </div>
+    <div class="bible-verse" id="bible-verse">"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you a hope and a future." - Jeremiah 29:11</div>
     <div class="owners-container">
         <div class="owner-box" id="scarlett-box">
             <div class="owner-image" style="background-image: url('scarlett.png');"></div>
