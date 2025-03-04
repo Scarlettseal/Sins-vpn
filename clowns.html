@@ -11,69 +11,68 @@
             box-sizing: border-box;
         }
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
-            background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+            background-color: black;
             color: white;
             font-family: 'Poppins', sans-serif;
             text-align: center;
-            animation: background-animation 5s infinite alternate;
             overflow: hidden;
-        }
-        @keyframes background-animation {
-            0% {
-                background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
-            }
-            100% {
-                background: radial-gradient(circle, rgba(40, 40, 40, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
-            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
         }
         h1 {
-            color: #ff6347;
-            font-size: 3rem;
-            text-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
-            margin-bottom: 30px;
-            letter-spacing: 5px;
-            transition: color 0.3s ease;
+            font-size: 6rem;
+            color: red;
+            position: relative;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 25px rgba(255, 0, 0, 0.5);
+            animation: bleed 1s infinite alternate;
+            letter-spacing: 10px;
+            margin-bottom: 40px;
         }
-        h1:hover {
-            color: #ff4500;
+
+        @keyframes bleed {
+            0% {
+                text-shadow: 0 0 15px rgba(255, 0, 0, 0.6), 0 0 25px rgba(255, 0, 0, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.9);
+            }
         }
+
         .container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 15px 45px rgba(255, 255, 255, 0.4);
-            width: 75%;
+            width: 70%;
             max-width: 800px;
-            perspective: 1000px;
-            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 15px 45px rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
         }
-        .container:hover {
-            transform: translateY(-10px);
-        }
+
         .image-box {
             width: 100%;
             height: 400px;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 12px;
-            margin-bottom: 25px;
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
             position: relative;
             overflow: hidden;
         }
+
         .image-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 12px;
         }
+
         .name-tag {
             position: absolute;
             bottom: 0;
@@ -87,19 +86,45 @@
             transform: translateY(100%);
             transition: transform 0.3s ease-in-out;
         }
+
         .image-box:hover .name-tag {
             transform: translateY(0);
         }
+
         .description {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             line-height: 1.6;
             max-width: 90%;
             margin: 0 auto;
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
         }
-        audio {
-            display: none;
+
+        .line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: move-lines 5s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes move-lines {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .floating-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
     </style>
 </head>
@@ -113,11 +138,30 @@
         <p class="description">Xon, a so-called “competent” skid, thrives on fake IP leaks and empty flexes. Constantly parading around with an inflated ego, they claim to be something they’re not—grasping at relevance with outdated scripts and false threats. Behind the mask, it’s nothing but stolen configs and desperation. Beware of the façade; the only thing real here is the fraud..</p>
     </div>
 
-    <audio id="bg-music" loop>
+    <!-- Floating Lines -->
+    <div class="floating-lines">
+        <div class="line" style="animation-duration: 7s;"></div>
+        <div class="line" style="animation-duration: 8s; animation-delay: 2s;"></div>
+        <div class="line" style="animation-duration: 10s; animation-delay: 4s;"></div>
+        <div class="line" style="animation-duration: 6s; animation-delay: 6s;"></div>
+    </div>
+
+    <audio id="bg-music" loop autoplay>
         <source src="fadsfadfasfadsfaf.mp3" type="audio/mpeg">
     </audio>
 
     <script>
+        document.body.addEventListener("mousemove", (e) => {
+            const lines = document.querySelectorAll(".line");
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            lines.forEach((line, index) => {
+                const speed = (index + 1) * 10;
+                line.style.transform = `translate(${mouseX / speed}px, ${mouseY / speed}px)`;
+            });
+        });
+
         window.addEventListener('load', function() {
             var audio = document.getElementById('bg-music');
             audio.play().catch(function(error) {
