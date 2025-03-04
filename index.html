@@ -93,10 +93,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
-            audio.volume = 0.5; // Set a lower volume to prevent autoplay restrictions
-            audio.play().catch(() => {
-                console.log("Autoplay blocked. User interaction required.");
-            });
+            audio.volume = 0.5;
+            
+            const playAudio = () => {
+                audio.play().catch(() => {
+                    document.addEventListener("click", () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            };
+            
+            setTimeout(playAudio, 500); // Small delay to increase autoplay success rate
         });
         
         function createSnowflake() {
