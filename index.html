@@ -6,17 +6,17 @@
     <title>Sins VPN - Coming Soon</title>
 
     <!-- Open Graph Meta Tags -->
-<meta property="og:title" content="Sins VPN - Coming Soon">
-<meta property="og:description" content="The future of VPNs is coming soon. Stay tuned for more!">
-<meta property="og:image" content="https://i.imgur.com/T7TgAQo.jpeg">
-<meta property="og:url" content="https://sins-vpn.vercel.app">
-<meta property="og:type" content="website">
+    <meta property="og:title" content="Sins VPN - Coming Soon">
+    <meta property="og:description" content="The future of VPNs is coming soon. Stay tuned for more!">
+    <meta property="og:image" content="https://i.imgur.com/T7TgAQo.jpeg">
+    <meta property="og:url" content="https://sins-vpn.vercel.app">
+    <meta property="og:type" content="website">
 
-<!-- Twitter Cards (optional but recommended) -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sins VPN - Coming Soon">
-<meta name="twitter:description" content="The future of VPNs is coming soon. Stay tuned for more!">
-<meta name="twitter:image" content="https://i.imgur.com/T7TgAQo.jpeg">
+    <!-- Twitter Cards (optional but recommended) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sins VPN - Coming Soon">
+    <meta name="twitter:description" content="The future of VPNs is coming soon. Stay tuned for more!">
+    <meta name="twitter:image" content="https://i.imgur.com/T7TgAQo.jpeg">
 
     <style>
         * {
@@ -150,7 +150,7 @@
 </head>
 <body>
     <audio id="bg-music" loop>
-        <source src="carti.mp3" type="audio/mpeg">
+        <source src="dfaadfafsafdsf32fdsgfgfsdgf4fdgfdsgsfg4q3fdasg.mp3" type="audio/mpeg">
     </audio>
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="background"></div>
@@ -168,15 +168,16 @@
         </div>
     </div>
     <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
-    <button class="features-button" onclick="window.location.href='fetures.html'">Features</button>
+    <button class="features-button" onclick="window.location.href='features.html'">Features</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
+
     <script>
         document.addEventListener("mousemove", function(event) {
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
         });
-        
+
         document.querySelectorAll(".owner-box").forEach(box => {
             box.addEventListener("mousemove", function(event) {
                 let boxRect = box.getBoundingClientRect();
@@ -188,6 +189,14 @@
             box.addEventListener("mouseleave", function() {
                 box.style.setProperty("--tiltX", `0deg`);
                 box.style.setProperty("--tiltY", `0deg`);
+            });
+        });
+
+        // Auto play the music when the page loads
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(function(error) {
+                console.log('Autoplay failed:', error);
             });
         });
     </script>
