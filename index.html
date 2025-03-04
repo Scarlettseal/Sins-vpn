@@ -23,6 +23,26 @@
             overflow: hidden;
             position: relative;
         }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.5rem;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out;
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
         .cursor-dot {
             position: fixed;
             width: 8px;
@@ -130,43 +150,15 @@
     </style>
 </head>
 <body>
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="background"></div>
-    <div class="container">
-        <div class="coming-soon">Coming Soon</div>
+    <div class="loading-screen" id="loading-screen">
+        <p>Site loading up....</p>
+        <p>Establishing encrypted connection...</p>
+        <p>Loading security protocols...</p>
     </div>
-    <div class="owners-container">
-        <div class="owner-box" id="scarlett-box">
-            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
-            <div class="owner-name">Scarlett</div>
-        </div>
-        <div class="owner-box" id="sin-box">
-            <div class="owner-image" style="background-image: url('sin.png');"></div>
-            <div class="owner-name">Sin</div>
-        </div>
-    </div>
-    <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
-    <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
     <script>
-        document.addEventListener("mousemove", function(event) {
-            let cursor = document.getElementById("cursor-dot");
-            cursor.style.left = `${event.clientX}px`;
-            cursor.style.top = `${event.clientY}px`;
-        });
-        
-        document.querySelectorAll(".owner-box").forEach(box => {
-            box.addEventListener("mousemove", function(event) {
-                let boxRect = box.getBoundingClientRect();
-                let x = ((event.clientX - boxRect.left) / boxRect.width - 0.5) * 30;
-                let y = ((event.clientY - boxRect.top) / boxRect.height - 0.5) * -30;
-                box.style.setProperty("--tiltX", `${x}deg`);
-                box.style.setProperty("--tiltY", `${y}deg`);
-            });
-            box.addEventListener("mouseleave", function() {
-                box.style.setProperty("--tiltX", `0deg`);
-                box.style.setProperty("--tiltY", `0deg`);
-            });
-        });
+        setTimeout(() => {
+            document.getElementById("loading-screen").classList.add("hidden");
+        }, 3000);
     </script>
 </body>
 </html>
