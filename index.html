@@ -98,6 +98,8 @@
             width: 100%;
             padding: 0 10%;
             perspective: 1000px;
+            align-items: flex-start;
+            gap: 40px;
         }
 
         .owner-box {
@@ -131,8 +133,14 @@
         }
 
         /* Enhanced Buttons */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
         .clown-button, .features-button {
-            position: absolute;
             padding: 15px 25px;
             background: linear-gradient(135deg, #6e44ff, #4b2a96);
             color: white;
@@ -170,12 +178,6 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        .clown-button .icon, .features-button .icon {
-            width: 20px;
-            height: 20px;
-            margin-left: 5px;
-        }
-
         .copyright {
             width: 100%;
             font-size: 0.9rem;
@@ -200,18 +202,22 @@
         <div class="owner-box" id="scarlett-box">
             <div class="owner-image" style="background-image: url('scarlett.png');"></div>
             <div class="owner-name">Scarlett</div>
+            <div class="button-container">
+                <button class="features-button" onclick="window.location.href='features.html'">
+                    <i class="fas fa-cogs"></i> Features
+                </button>
+            </div>
         </div>
         <div class="owner-box" id="sin-box">
             <div class="owner-image" style="background-image: url('sin.png');"></div>
             <div class="owner-name">Sin</div>
+            <div class="button-container">
+                <button class="clown-button" onclick="window.location.href='clowns.html'">
+                    <i class="fas fa-users"></i> Clowns
+                </button>
+            </div>
         </div>
     </div>
-    <button class="clown-button" onclick="window.location.href='clowns.html'">
-        <i class="fas fa-users"></i> Clowns
-    </button>
-    <button class="features-button" onclick="window.location.href='features.html'">
-        <i class="fas fa-cogs"></i> Features
-    </button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 
     <script>
