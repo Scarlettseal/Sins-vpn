@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Sins VPN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            color: #ff0000;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            perspective: 1000px;
+        }
+        .features-box {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease-out;
+        }
+        .features-box:hover {
+            transform: rotateY(var(--tiltX)) rotateX(var(--tiltY));
+        }
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px red;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            font-size: 1.5rem;
+        }
+        ul li {
+            margin: 15px 0;
+            transition: transform 0.2s;
+        }
+        ul li:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="features-box" id="features-box">
+            <h1>🔥 Sins VPN Features 🔥</h1>
+            <ul>
+                <li>⚡ Ultra-Fast Speeds</li>
+                <li>🛡️ Military-Grade Encryption</li>
+                <li>🌎 Worldwide Servers</li>
+                <li>🔒 No-Log Policy</li>
+                <li>📱 Multi-Device Support</li>
+                <li>🎭 Anonymous Browsing</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById("features-box").addEventListener("mousemove", function(event) {
+            let boxRect = this.getBoundingClientRect();
+            let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
+            let y = (event.clientY - boxRect.top - boxRect.height / 2) / 15;
+            this.style.setProperty("--tiltX", `${x}deg`);
+            this.style.setProperty("--tiltY", `${-y}deg`);
+        });
+        document.getElementById("features-box").addEventListener("mouseleave", function() {
+            this.style.setProperty("--tiltX", `0deg`);
+            this.style.setProperty("--tiltY", `0deg`);
+        });
+    </script>
+</body>
+</html>
