@@ -132,50 +132,37 @@
             font-weight: bold;
         }
 
-        /* Enhanced Buttons */
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+        /* Poll Section Styles */
+        .poll-container {
+            margin-top: 30px;
         }
 
-        .clown-button, .features-button {
-            padding: 15px 25px;
-            background: linear-gradient(135deg, #6e44ff, #4b2a96);
-            color: white;
+        .poll-question {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .poll-option {
+            padding: 10px;
+            background: #fff;
+            color: #000;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .clown-button i, .features-button i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .clown-button:hover, .features-button:hover {
-            background: linear-gradient(135deg, #8c5aff, #6a3a87);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-        }
-
-        .clown-button i:hover, .features-button i:hover {
-            transform: translateX(5px);
-        }
-
-        .clown-button:active, .features-button:active {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        .poll-option:hover {
+            background-color: #d3d3d3;
         }
 
         .copyright {
@@ -187,30 +174,6 @@
             bottom: 10px;
             text-align: center;
         }
-
-        /* Poll Styles */
-        .poll-container {
-            position: absolute;
-            bottom: 100px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .poll-option {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .poll-option:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-
     </style>
 </head>
 <body>
@@ -245,8 +208,11 @@
 
     <!-- Poll Section -->
     <div class="poll-container">
-        <div class="poll-option" onclick="submitVote('Free accs')">Free accs</div>
-        <div class="poll-option" onclick="submitVote('VPN')">VPN</div>
+        <div class="poll-question">What's your preferred option?</div>
+        <div class="poll-options">
+            <button class="poll-option" onclick="submitPoll('Free accs')">Free accs</button>
+            <button class="poll-option" onclick="submitPoll('VPN')">VPN</button>
+        </div>
     </div>
 
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
@@ -272,6 +238,24 @@
             });
         });
 
+        // Poll Submission
+        function submitPoll(option) {
+            fetch('submit_poll.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `vote=${option}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Thank you for voting!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
         // Auto play the music when the page loads
         window.addEventListener('load', function() {
             var audio = document.getElementById('bg-music');
@@ -279,24 +263,6 @@
                 console.log('Autoplay failed:', error);
             });
         });
-
-        // Poll submission function
-        function submitVote(option) {
-            // For now, we simply log the vote to the console
-            // In a real scenario, you would store this in the 'db.txt' file on your server
-
-            // This is a placeholder for saving the vote to a file on the server (e.g., using PHP, Node.js, etc.)
-            console.log('User voted for:', option);
-
-            // Example of sending the vote to the server (you'd need server-side code for this)
-            // fetch('/submit_vote', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({ vote: option })
-            // });
-        }
     </script>
 </body>
 </html>
