@@ -16,30 +16,39 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #0f0f0f, #333);
+            background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
             color: white;
             font-family: 'Poppins', sans-serif;
             text-align: center;
+            animation: background-animation 5s infinite alternate;
             overflow: hidden;
         }
+        @keyframes background-animation {
+            0% {
+                background: radial-gradient(circle, rgba(20, 20, 20, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+            }
+            100% {
+                background: radial-gradient(circle, rgba(40, 40, 40, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+            }
+        }
         h1 {
-            color: #ff4500;
+            color: #ff6347;
             font-size: 3rem;
-            text-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+            text-shadow: 0 0 20px rgba(255, 99, 71, 0.8);
             margin-bottom: 30px;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             transition: color 0.3s ease;
         }
         h1:hover {
-            color: #ff6347;
+            color: #ff4500;
         }
         .container {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 15px 45px rgba(255, 255, 255, 0.2);
-            width: 70%;
-            max-width: 700px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(255, 255, 255, 0.4);
+            width: 75%;
+            max-width: 800px;
             perspective: 1000px;
             transition: transform 0.3s ease-in-out;
         }
@@ -48,14 +57,14 @@
         }
         .image-box {
             width: 100%;
-            height: 350px;
-            background: rgba(255, 255, 255, 0.2);
+            height: 400px;
+            background: rgba(255, 255, 255, 0.25);
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -63,7 +72,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
         }
         .name-tag {
             position: absolute;
@@ -82,27 +91,15 @@
             transform: translateY(0);
         }
         .description {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
             line-height: 1.6;
             max-width: 90%;
             margin: 0 auto;
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
         }
-        .music-controls {
-            margin-top: 20px;
-        }
-        .music-controls button {
-            background: #ff6347;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .music-controls button:hover {
-            background: #ff4500;
+        audio {
+            display: none;
         }
     </style>
 </head>
@@ -116,28 +113,17 @@
         <p class="description">Xon, a so-called “competent” skid, thrives on fake IP leaks and empty flexes. Constantly parading around with an inflated ego, they claim to be something they’re not—grasping at relevance with outdated scripts and false threats. Behind the mask, it’s nothing but stolen configs and desperation. Beware of the façade; the only thing real here is the fraud..</p>
     </div>
 
-    <div class="music-controls">
-        <button onclick="toggleAudio()">Play/Pause Music</button>
-    </div>
-
     <audio id="bg-music" loop>
         <source src="fadsfadfasfadsfaf.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        let audio = document.getElementById('bg-music');
-        let isPlaying = false;
-
-        function toggleAudio() {
-            if (isPlaying) {
-                audio.pause();
-            } else {
-                audio.play().catch(function(error) {
-                    console.log('Autoplay failed:', error);
-                });
-            }
-            isPlaying = !isPlaying;
-        }
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(function(error) {
+                console.log('Autoplay failed:', error);
+            });
+        });
     </script>
 </body>
 </html>
