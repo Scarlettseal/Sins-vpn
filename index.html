@@ -32,23 +32,26 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
         }
-        .intro {
+        .trail {
             position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            z-index: 9999;
-            animation: introFadeOut 2.5s forwards 2s;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            transition: transform 0.1s ease-out, opacity 0.2s ease-in-out;
         }
-        @keyframes introFadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            animation: pulse 6s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
         .container {
             position: relative;
@@ -57,12 +60,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards 3s;
         }
         .coming-soon {
             font-size: 3.5rem;
             font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
@@ -80,8 +83,6 @@
             width: 100%;
             padding: 0 10%;
             perspective: 1000px;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards 3.5s;
         }
         .owner-box {
             background: rgba(255, 255, 255, 0.1);
@@ -97,6 +98,18 @@
         .owner-box:hover {
             transform: rotateY(var(--tiltX)) rotateX(var(--tiltY));
         }
+        .owner-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        .owner-name {
+            margin-top: 15px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
         .clown-button {
             position: absolute;
             bottom: 20px;
@@ -109,8 +122,6 @@
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s, transform 0.2s;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards 4s;
         }
         .clown-button:hover {
             background: #333;
@@ -124,22 +135,22 @@
             position: absolute;
             bottom: 10px;
             text-align: center;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards 4.5s;
         }
     </style>
 </head>
 <body>
-    <div class="intro">SINS VPN</div>
     <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
     </div>
     <div class="owners-container">
         <div class="owner-box" id="scarlett-box">
+            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
             <div class="owner-name">Scarlett</div>
         </div>
         <div class="owner-box" id="sin-box">
+            <div class="owner-image" style="background-image: url('sin.png');"></div>
             <div class="owner-name">Sin</div>
         </div>
     </div>
@@ -150,6 +161,14 @@
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
+            
+            let trail = document.createElement("div");
+            trail.classList.add("trail");
+            document.body.appendChild(trail);
+            trail.style.left = `${event.clientX}px`;
+            trail.style.top = `${event.clientY}px`;
+            setTimeout(() => trail.style.opacity = "0", 100);
+            setTimeout(() => trail.remove(), 200);
         });
     </script>
 </body>
