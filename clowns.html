@@ -88,5 +88,18 @@
         </div>
         <p class="description">Xon, a so-called “competent” skid, thrives on fake IP leaks and empty flexes. Constantly parading around with an inflated ego, they claim to be something they’re not—grasping at relevance with outdated scripts and false threats. Behind the mask, it’s nothing but stolen configs and desperation. Beware of the façade; the only thing real here is the fraud..</p>
     </div>
+
+    <audio id="bg-music" loop>
+        <source src="fadsfadfasfadsfaf.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(function(error) {
+                console.log('Autoplay failed:', error);
+            });
+        });
+    </script>
 </body>
 </html>
