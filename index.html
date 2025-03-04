@@ -100,10 +100,8 @@
             font-size: 1.8rem;
             font-weight: bold;
         }
-        .clown-button {
+        .clown-button, .features-button {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
             padding: 10px 20px;
             background: black;
             color: white;
@@ -113,7 +111,15 @@
             font-size: 1rem;
             transition: background 0.3s, transform 0.2s;
         }
-        .clown-button:hover {
+        .clown-button {
+            bottom: 20px;
+            left: 20px;
+        }
+        .features-button {
+            bottom: 20px;
+            right: 20px;
+        }
+        .clown-button:hover, .features-button:hover {
             background: #333;
             transform: scale(1.1);
         }
@@ -148,6 +154,7 @@
         </div>
     </div>
     <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
+    <button class="features-button" onclick="window.location.href='features.html'">Features</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
     <script>
         document.addEventListener("mousemove", function(event) {
