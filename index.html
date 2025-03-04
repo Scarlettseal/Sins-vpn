@@ -54,20 +54,14 @@
         .coming-soon {
             font-size: 3.5rem;
             font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid white;
-            width: 0;
-            animation: typewriter 3s steps(12) forwards, blink 0.6s infinite;
         }
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .owners-container {
             position: absolute;
@@ -88,11 +82,11 @@
             width: 300px;
             height: 400px;
             text-align: center;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
         }
         .owner-box:hover {
-            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
+            transform: rotateY(var(--tiltX)) rotateX(var(--tiltY));
         }
         .owner-image {
             width: 100%;
@@ -135,9 +129,6 @@
     </style>
 </head>
 <body>
-    <audio id="bg-music" loop>
-        <source src="carti.mp3" type="audio/mpeg">
-    </audio>
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="background"></div>
     <div class="container">
@@ -165,8 +156,8 @@
         document.querySelectorAll(".owner-box").forEach(box => {
             box.addEventListener("mousemove", function(event) {
                 let boxRect = box.getBoundingClientRect();
-                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 20;
-                let y = (event.clientY - boxRect.top - boxRect.height / 2) / 20;
+                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
+                let y = (event.clientY - boxRect.top - boxRect.height / 2) / 15;
                 box.style.setProperty("--tiltX", `${x}deg`);
                 box.style.setProperty("--tiltY", `${-y}deg`);
             });
