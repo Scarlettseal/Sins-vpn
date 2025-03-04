@@ -77,6 +77,13 @@
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
         .owners-container {
             position: absolute;
             top: 50%;
@@ -156,6 +163,9 @@
     <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
+        <div class="countdown">
+            <p>Launching in <span id="timer"></span></p>
+        </div>
     </div>
     <div class="owners-container">
         <div class="owner-box" id="scarlett-box">
@@ -172,6 +182,31 @@
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 
     <script>
+        // Countdown Logic
+        let countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 60);  // Adds 60 days from today
+
+        let timer = setInterval(function() {
+            let now = new Date().getTime();
+            let distance = countdownDate - now;
+
+            // Time calculations
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the 'timer' element
+            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            // If the countdown is finished, display "EXPIRED"
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("timer").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+        // Cursor Effect
         document.addEventListener("mousemove", function(event) {
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
