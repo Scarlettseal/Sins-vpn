@@ -54,14 +54,20 @@
         .coming-soon {
             font-size: 3.5rem;
             font-weight: bold;
-            opacity: 0;
-            animation: fadeIn 3s ease-in-out forwards;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            width: 0;
+            animation: typewriter 3s steps(12) forwards, blink 0.6s infinite;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
         .owners-container {
             position: absolute;
