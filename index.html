@@ -32,17 +32,26 @@
             background: black;
             color: white;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             font-size: 1.5rem;
             z-index: 9999;
+            opacity: 1;
             transition: opacity 1s ease-in-out;
         }
-        .hidden {
+        .loading-text {
             opacity: 0;
-            pointer-events: none;
+            animation: fadeIn 1s ease-in-out forwards;
         }
+        .loading-text:nth-child(2) { animation-delay: 1s; }
+        .loading-text:nth-child(3) { animation-delay: 2s; }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
         .cursor-dot {
             position: fixed;
             width: 8px;
@@ -59,10 +68,6 @@
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
             animation: pulse 6s infinite ease-in-out;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
         .container {
             position: relative;
             z-index: 2;
@@ -78,10 +83,6 @@
             animation: fadeIn 3s ease-in-out forwards;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
         .owners-container {
             position: absolute;
@@ -106,21 +107,6 @@
             transform-style: preserve-3d;
             will-change: transform;
         }
-        .owner-box:hover {
-            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
-        }
-        .owner-image {
-            width: 100%;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-        }
-        .owner-name {
-            margin-top: 15px;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
         .clown-button {
             position: absolute;
             bottom: 20px;
@@ -133,10 +119,6 @@
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s, transform 0.2s;
-        }
-        .clown-button:hover {
-            background: #333;
-            transform: scale(1.1);
         }
         .copyright {
             width: 100%;
@@ -151,14 +133,34 @@
 </head>
 <body>
     <div class="loading-screen" id="loading-screen">
-        <p>Site loading up....</p>
-        <p>Establishing encrypted connection...</p>
-        <p>Loading security protocols...</p>
+        <div class="loading-text">Site loading up....</div>
+        <div class="loading-text">Establishing encrypted connection...</div>
+        <div class="loading-text">Loading security protocols...</div>
     </div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="background"></div>
+    <div class="container">
+        <div class="coming-soon">Coming Soon</div>
+    </div>
+    <div class="owners-container">
+        <div class="owner-box" id="scarlett-box">
+            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
+            <div class="owner-name">Scarlett</div>
+        </div>
+        <div class="owner-box" id="sin-box">
+            <div class="owner-image" style="background-image: url('sin.png');"></div>
+            <div class="owner-name">Sin</div>
+        </div>
+    </div>
+    <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
+    <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
     <script>
-        setTimeout(() => {
-            document.getElementById("loading-screen").classList.add("hidden");
-        }, 3000);
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById("loading-screen").style.opacity = "0";
+                setTimeout(() => { document.getElementById("loading-screen").style.display = "none"; }, 1000);
+            }, 3000);
+        });
     </script>
 </body>
 </html>
