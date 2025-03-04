@@ -41,6 +41,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .coming-soon {
             font-size: 3.5rem;
@@ -54,6 +55,39 @@
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+        .owners-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 900px;
+            margin-top: 50px;
+        }
+        .owner-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            width: 45%;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .owner-box:hover {
+            transform: translateY(-5px);
+        }
+        .owner-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .owner-name {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
         .copyright {
             width: 100%;
             font-size: 0.9rem;
@@ -62,39 +96,6 @@
             position: absolute;
             bottom: 10px;
             text-align: center;
-        }
-        .clowns-button {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            background: #000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .clowns-button:hover {
-            background: #222;
-            transform: scale(1.05);
-        }
-        .snowflake {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            opacity: 0.8;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
         }
     </style>
 </head>
@@ -105,44 +106,17 @@
     <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
+        <div class="owners-container">
+            <div class="owner-box">
+                <div class="owner-image">Image for Sin</div>
+                <div class="owner-name">Sin</div>
+            </div>
+            <div class="owner-box">
+                <div class="owner-image">Image for Scarlett</div>
+                <div class="owner-name">Scarlett</div>
+            </div>
+        </div>
     </div>
-    <button class="clowns-button" onclick="window.location.href='clowns.html'">Clowns</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const audio = document.getElementById("bg-music");
-            audio.volume = 0.5;
-            
-            const playAudio = () => {
-                audio.play().catch(() => {
-                    document.addEventListener("click", () => {
-                        audio.play();
-                    }, { once: true });
-                });
-            };
-            
-            setTimeout(playAudio, 500); // Small delay to increase autoplay success rate
-        });
-        
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            document.body.appendChild(snowflake);
-            
-            const size = Math.random() * 8 + 2 + 'px';
-            const startX = Math.random() * window.innerWidth + 'px';
-            const duration = Math.random() * 5 + 3 + 's';
-            
-            snowflake.style.width = size;
-            snowflake.style.height = size;
-            snowflake.style.left = startX;
-            snowflake.style.animationDuration = duration;
-            
-            setTimeout(() => {
-                snowflake.remove();
-            }, parseFloat(duration) * 1000);
-        }
-        setInterval(createSnowflake, 100);
-    </script>
 </body>
 </html>
