@@ -37,8 +37,6 @@
             align-items: center;
             font-size: 1.5rem;
             z-index: 9999;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
         }
         .loading-text {
             opacity: 0;
@@ -61,39 +59,17 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
         }
-        .background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
-            animation: pulse 6s infinite ease-in-out;
-        }
         .container {
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .coming-soon {
-            font-size: 3.5rem;
-            font-weight: bold;
             opacity: 0;
-            animation: fadeIn 3s ease-in-out forwards;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 2s ease-in-out forwards 3s;
         }
         .owners-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             display: flex;
             justify-content: space-between;
             width: 100%;
             padding: 0 10%;
-            perspective: 1000px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards 3s;
         }
         .owner-box {
             background: rgba(255, 255, 255, 0.1);
@@ -119,6 +95,8 @@
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s, transform 0.2s;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards 3s;
         }
         .copyright {
             width: 100%;
@@ -128,6 +106,8 @@
             position: absolute;
             bottom: 10px;
             text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards 3s;
         }
     </style>
 </head>
@@ -138,17 +118,14 @@
         <div class="loading-text">Loading security protocols...</div>
     </div>
     <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
     </div>
     <div class="owners-container">
         <div class="owner-box" id="scarlett-box">
-            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
             <div class="owner-name">Scarlett</div>
         </div>
         <div class="owner-box" id="sin-box">
-            <div class="owner-image" style="background-image: url('sin.png');"></div>
             <div class="owner-name">Sin</div>
         </div>
     </div>
