@@ -55,21 +55,13 @@
             font-size: 3.5rem;
             font-weight: bold;
             opacity: 0;
-            animation: fadeIn 3s ease-in-out forwards, glitch 1.5s infinite;
+            animation: fadeIn 3s ease-in-out forwards;
             letter-spacing: 3px;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            position: relative;
         }
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes glitch {
-            0% { text-shadow: 2px 2px red, -2px -2px blue; }
-            25% { text-shadow: -2px -2px red, 2px 2px blue; }
-            50% { text-shadow: 2px -2px red, -2px 2px blue; }
-            75% { text-shadow: -2px 2px red, 2px -2px blue; }
-            100% { text-shadow: 2px 2px red, -2px -2px blue; }
         }
         .owners-container {
             position: absolute;
@@ -90,11 +82,12 @@
             width: 300px;
             height: 400px;
             text-align: center;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.2s ease-out;
             transform-style: preserve-3d;
+            will-change: transform;
         }
         .owner-box:hover {
-            transform: rotateY(var(--tiltX)) rotateX(var(--tiltY));
+            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
         }
         .owner-image {
             width: 100%;
@@ -164,10 +157,10 @@
         document.querySelectorAll(".owner-box").forEach(box => {
             box.addEventListener("mousemove", function(event) {
                 let boxRect = box.getBoundingClientRect();
-                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
-                let y = (event.a - boxRect.top - boxRect.height / 2) / 15;
+                let x = ((event.clientX - boxRect.left) / boxRect.width - 0.5) * 30;
+                let y = ((event.clientY - boxRect.top) / boxRect.height - 0.5) * -30;
                 box.style.setProperty("--tiltX", `${x}deg`);
-                box.style.setProperty("--tiltY", `${-y}deg`);
+                box.style.setProperty("--tiltY", `${y}deg`);
             });
             box.addEventListener("mouseleave", function() {
                 box.style.setProperty("--tiltX", `0deg`);
