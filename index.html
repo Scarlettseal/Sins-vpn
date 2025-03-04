@@ -23,17 +23,14 @@
             overflow: hidden;
             position: relative;
         }
-        .cursor {
+        .cursor-dot {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: white;
+            width: 8px;
+            height: 8px;
+            background: white;
             border-radius: 50%;
             pointer-events: none;
-            transition: transform 0.1s ease-out;
-        }
-        .dragging {
-            cursor: grabbing;
+            transition: transform 0.1s linear;
         }
         .background {
             position: absolute;
@@ -65,6 +62,41 @@
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+        .owners-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10%;
+        }
+        .owner-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+            width: 300px;
+            height: 400px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .owner-box:hover {
+            transform: translateY(-10px);
+        }
+        .owner-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        .owner-name {
+            margin-top: 15px;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
         .clown-button {
             position: absolute;
@@ -98,27 +130,27 @@
     <audio id="bg-music" loop>
         <source src="carti.mp3" type="audio/mpeg">
     </audio>
-    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
     <div class="background"></div>
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
     </div>
+    <div class="owners-container">
+        <div class="owner-box">
+            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
+            <div class="owner-name">Scarlett</div>
+        </div>
+        <div class="owner-box">
+            <div class="owner-image" style="background-image: url('sin.png');"></div>
+            <div class="owner-name">Sin</div>
+        </div>
+    </div>
     <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
     <script>
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate(${e.clientX - 5}px, ${e.clientY - 5}px)`;
-        });
-
-        let isDragging = false;
-        document.addEventListener('mousedown', () => {
-            isDragging = true;
-            cursor.classList.add('dragging');
-        });
-        documentaaddEventListener('mouseup', () => {
-            isDragging = false;
-            cursor.classList.remove('dragging');
+        document.addEventListener("mousemove", function(event) {
+            let cursor = document.getElementById("cursor-dot");
+            cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
         });
     </script>
 </body>
