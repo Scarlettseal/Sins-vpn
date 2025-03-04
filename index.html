@@ -88,6 +88,23 @@
             font-size: 1.8rem;
             font-weight: bold;
         }
+        .clown-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .clown-button:hover {
+            background: #333;
+            transform: scale(1.1);
+        }
         .copyright {
             width: 100%;
             font-size: 0.9rem;
@@ -97,37 +114,10 @@
             bottom: 10px;
             text-align: center;
         }
-        .clowns-button {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: black;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        .clowns-button:hover {
-            background: #333;
-            transform: scale(1.1);
-        }
-        .snowflake {
-            position: absolute;
-            color: white;
-            font-size: 12px;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            from { transform: translateY(-10vh); }
-            to { transform: translateY(100vh); }
-        }
     </style>
 </head>
 <body>
-    <audio id="bg-music" autoplay loop>
+    <audio id="bg-music" loop>
         <source src="carti.mp3" type="audio/mpeg">
     </audio>
     <div class="background"></div>
@@ -144,22 +134,7 @@
             <div class="owner-name">Sin</div>
         </div>
     </div>
-    <button class="clowns-button" onclick="window.location.href='clowns.html'">Clowns</button>
+    <button class="clown-button" onclick="window.location.href='clowns.html'">Clowns</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
-    <script>
-        function createSnowflakes() {
-            for (let i = 0; i < 50; i++) {
-                let snowflake = document.createElement("div");
-                snowflake.classList.add("snowflake");
-                snowflake.innerHTML = "❄";
-                snowflake.style.left = Math.random() * window.innerWidth + "px";
-                snowflake.style.animationDuration = (Math.random() * 5 + 5) + "s";
-                snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
-                document.body.appendChild(snowflake);
-                setTimeout(() => { snowflake.remove(); }, 10000);
-            }
-        }
-        setInterval(createSnowflakes, 1000);
-    </script>
 </body>
 </html>
