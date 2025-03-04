@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sins VPN - Login</title>
+    <title>Sins VPN - Coming Soon</title>
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Sins VPN - Login">
-    <meta property="og:description" content="Login to access Sins VPN">
+    <meta property="og:title" content="Sins VPN - Coming Soon">
+    <meta property="og:description" content="The future of VPNs is coming soon. Stay tuned for more!">
     <meta property="og:image" content="https://i.imgur.com/8etNCkh.png">
     <meta property="og:url" content="https://vps-chi.vercel.app">
     <meta property="og:type" content="website">
 
+    <!-- Twitter Cards (optional but recommended) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sins VPN - Coming Soon">
+    <meta name="twitter:description" content="The future of VPNs is coming soon. Stay tuned for more!">
+    <meta name="twitter:image" content="https://i.imgur.com/8etNCkh.png">
+
+    <!-- FontAwesome CDN for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
@@ -58,35 +65,82 @@
             50% { opacity: 1; }
         }
 
-        .login-container {
+        .container {
             position: relative;
             z-index: 2;
+            flex-grow: 1;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 30px;
+        }
+
+        .coming-soon {
+            font-size: 3.5rem;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .owners-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10%;
+            perspective: 1000px;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .owner-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+            width: 300px;
+            height: 400px;
+            text-align: center;
+            transition: transform 0.2s ease-out;
+            transform-style: preserve-3d;
         }
 
-        .login-title {
-            font-size: 2.5rem;
+        .owner-box:hover {
+            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
+        }
+
+        .owner-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+        .owner-name {
+            margin-top: 15px;
+            font-size: 1.8rem;
             font-weight: bold;
-            margin-bottom: 20px;
         }
 
-        input {
-            padding: 15px;
-            margin: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            width: 250px;
-            font-size: 1rem;
+        /* Enhanced Buttons */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .login-button {
+        .clown-button, .features-button {
             padding: 15px 25px;
             background: linear-gradient(135deg, #6e44ff, #4b2a96);
             color: white;
@@ -96,16 +150,30 @@
             font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 1px;
             transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .login-button:hover {
+        .clown-button i, .features-button i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .clown-button:hover, .features-button:hover {
             background: linear-gradient(135deg, #8c5aff, #6a3a87);
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
-        .login-button:active {
+        .clown-button i:hover, .features-button i:hover {
+            transform: translateX(5px);
+        }
+
+        .clown-button:active, .features-button:active {
             transform: scale(1.05);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
@@ -127,15 +195,29 @@
     </audio>
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="background"></div>
-
-    <!-- Login Form -->
-    <div class="login-container">
-        <div class="login-title">Login to Sins VPN</div>
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button class="login-button" onclick="login()">Login</button>
+    <div class="container">
+        <div class="coming-soon">Coming Soon</div>
     </div>
-
+    <div class="owners-container">
+        <div class="owner-box" id="scarlett-box">
+            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
+            <div class="owner-name">Scarlett</div>
+            <div class="button-container">
+                <button class="features-button" onclick="window.location.href='fetures.html'">
+                    <i class="fas fa-cogs"></i> Features
+                </button>
+            </div>
+        </div>
+        <div class="owner-box" id="sin-box">
+            <div class="owner-image" style="background-image: url('sin.png');"></div>
+            <div class="owner-name">Sin</div>
+            <div class="button-container">
+                <button class="clown-button" onclick="window.location.href='clowns.html'">
+                    <i class="fas fa-users"></i> Clowns
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 
     <script>
@@ -145,26 +227,27 @@
             cursor.style.top = `${event.clientY}px`;
         });
 
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const ip = window.location.hostname;  // Get IP (or use a custom method to get the user IP)
+        document.querySelectorAll(".owner-box").forEach(box => {
+            box.addEventListener("mousemove", function(event) {
+                let boxRect = box.getBoundingClientRect();
+                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
+                let y = (event.clientY - boxRect.top - boxRect.height / 2) / 15;
+                box.style.setProperty("--tiltX", `${x}deg`);
+                box.style.setProperty("--tiltY", `${-y}deg`);
+            });
+            box.addEventListener("mouseleave", function() {
+                box.style.setProperty("--tiltX", `0deg`);
+                box.style.setProperty("--tiltY", `0deg`);
+            });
+        });
 
-            // Send username, password, and IP to the server (e.g., PHP script to handle it)
-            const request = new XMLHttpRequest();
-            request.open('POST', 'login_handler.php', true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            request.send(`username=${username}&password=${password}&ip=${ip}`);
-
-            request.onload = function() {
-                if (request.status === 200 && request.responseText === 'Success') {
-                    // Redirect to the main page after successful login
-                    window.location.href = 'home.html';
-                } else {
-                    alert('Invalid login details or IP mismatch.');
-                }
-            };
-        }
+        // Auto play the music when the page loads
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(function(error) {
+                console.log('Autoplay failed:', error);
+            });
+        });
     </script>
 </body>
 </html>
