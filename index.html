@@ -86,7 +86,7 @@
             transform-style: preserve-3d;
         }
         .owner-box:hover {
-            transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+            transform: scale(1.05);
         }
         .owner-image {
             width: 100%;
@@ -138,11 +138,11 @@
         <div class="coming-soon">Coming Soon</div>
     </div>
     <div class="owners-container">
-        <div class="owner-box">
+        <div class="owner-box" id="scarlett-box">
             <div class="owner-image" style="background-image: url('scarlett.png');"></div>
             <div class="owner-name">Scarlett</div>
         </div>
-        <div class="owner-box">
+        <div class="owner-box" id="sin-box">
             <div class="owner-image" style="background-image: url('sin.png');"></div>
             <div class="owner-name">Sin</div>
         </div>
@@ -154,6 +154,12 @@
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
+            
+            let x = (window.innerWidth / 2 - event.clientX) / 20;
+            let y = (window.innerHeight / 2 - event.clientY) / 20;
+            
+            document.getElementById("scarlett-box").style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
+            document.getElementById("sin-box").style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
         });
     </script>
 </body>
