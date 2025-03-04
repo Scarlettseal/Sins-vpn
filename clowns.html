@@ -28,7 +28,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #111;
+            background: radial-gradient(circle, #3e1e56, #140a2e);
             color: #fff;
             text-align: center;
             overflow: hidden;
@@ -42,6 +42,11 @@
             width: 300px;
             text-align: center;
             box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-container:hover {
+            transform: scale(1.05) rotate(3deg);
         }
 
         .profile-image {
@@ -51,13 +56,15 @@
             background-size: cover;
             background-position: center;
             border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
         }
 
         .profile-name {
             margin-top: 20px;
             font-size: 2rem;
             font-weight: bold;
-            color: #e1e1e1;
+            color: #f7a7d1; /* Light pink */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         .profile-bio {
@@ -71,7 +78,7 @@
         .back-button {
             margin-top: 20px;
             padding: 15px 25px;
-            background: linear-gradient(135deg, #6e44ff, #4b2a96);
+            background: linear-gradient(135deg, #9c2d56, #7a1835); /* Red to dark red */
             color: white;
             border: none;
             border-radius: 8px;
@@ -91,7 +98,7 @@
         }
 
         .back-button:hover {
-            background: linear-gradient(135deg, #8c5aff, #6a3a87);
+            background: linear-gradient(135deg, #c7456f, #8b1d42); /* Brighter red to dark red */
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
@@ -107,6 +114,20 @@
             position: absolute;
             bottom: 10px;
             text-align: center;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
