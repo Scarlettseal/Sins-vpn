@@ -63,6 +63,22 @@
             bottom: 10px;
             text-align: center;
         }
+        .clowns-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .clowns-button:hover {
+            background: #cc0000;
+        }
         .snowflake {
             position: absolute;
             background: rgba(255, 255, 255, 0.8);
@@ -89,6 +105,7 @@
     <div class="container">
         <div class="coming-soon">Coming Soon</div>
     </div>
+    <button class="clowns-button" onclick="window.location.href='clowns.html'">Clowns</button>
     <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
