@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sins VPN - Coming Soon</title>
+    <title>Sins VPN - Login</title>
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Sins VPN - Coming Soon">
@@ -88,94 +88,42 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .owners-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0 10%;
-            perspective: 1000px;
-            align-items: flex-start;
-            gap: 40px;
-        }
-
-        .owner-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
+        .login-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
-            width: 300px;
-            height: 400px;
-            text-align: center;
-            transition: transform 0.2s ease-out;
-            transform-style: preserve-3d;
-        }
-
-        .owner-box:hover {
-            transform: perspective(1000px) rotateY(var(--tiltX)) rotateX(var(--tiltY));
-        }
-
-        .owner-image {
             width: 100%;
-            height: 250px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
         }
 
-        .owner-name {
-            margin-top: 15px;
-            font-size: 1.8rem;
-            font-weight: bold;
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 1rem;
         }
 
-        /* Enhanced Buttons */
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .clown-button, .features-button {
-            padding: 15px 25px;
+        .login-container button {
+            width: 100%;
+            padding: 12px;
             background: linear-gradient(135deg, #6e44ff, #4b2a96);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             transition: all 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .clown-button i, .features-button i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .clown-button:hover, .features-button:hover {
+        .login-container button:hover {
             background: linear-gradient(135deg, #8c5aff, #6a3a87);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-        }
-
-        .clown-button i:hover, .features-button i:hover {
-            transform: translateX(5px);
-        }
-
-        .clown-button:active, .features-button:active {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         .copyright {
@@ -195,50 +143,21 @@
     </audio>
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="background"></div>
-    <div class="container">
-        <div class="coming-soon">Coming Soon</div>
+
+    <div class="login-container">
+        <h2>Login to Sins VPN</h2>
+        <form id="login-form" onsubmit="return validateLogin()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
     </div>
-    <div class="owners-container">
-        <div class="owner-box" id="scarlett-box">
-            <div class="owner-image" style="background-image: url('scarlett.png');"></div>
-            <div class="owner-name">Scarlett</div>
-            <div class="button-container">
-                <button class="features-button" onclick="window.location.href='fetures.html'">
-                    <i class="fas fa-cogs"></i> Features
-                </button>
-            </div>
-        </div>
-        <div class="owner-box" id="sin-box">
-            <div class="owner-image" style="background-image: url('sin.png');"></div>
-            <div class="owner-name">Sin</div>
-            <div class="button-container">
-                <button class="clown-button" onclick="window.location.href='clowns.html'">
-                    <i class="fas fa-users"></i> Clowns
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 
     <script>
         document.addEventListener("mousemove", function(event) {
             let cursor = document.getElementById("cursor-dot");
             cursor.style.left = `${event.clientX}px`;
             cursor.style.top = `${event.clientY}px`;
-        });
-
-        document.querySelectorAll(".owner-box").forEach(box => {
-            box.addEventListener("mousemove", function(event) {
-                let boxRect = box.getBoundingClientRect();
-                let x = (event.clientX - boxRect.left - boxRect.width / 2) / 15;
-                let y = (event.clientY - boxRect.top - boxRect.height / 2) / 15;
-                box.style.setProperty("--tiltX", `${x}deg`);
-                box.style.setProperty("--tiltY", `${-y}deg`);
-            });
-            box.addEventListener("mouseleave", function() {
-                box.style.setProperty("--tiltX", `0deg`);
-                box.style.setProperty("--tiltY", `0deg`);
-            });
         });
 
         // Auto play the music when the page loads
@@ -248,6 +167,36 @@
                 console.log('Autoplay failed:', error);
             });
         });
+
+        // Login form validation and IP check
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userIp = window.location.hostname; // Get user's IP from hostname (adjust as necessary)
+
+            fetch('db.txt')
+                .then(response => response.text())
+                .then(data => {
+                    const storedData = data.split('\n');
+                    const storedUsername = storedData[0].split('=')[1].trim();
+                    const storedPassword = storedData[1].split('=')[1].trim();
+                    const storedIp = storedData[2].split('=')[1].trim();
+
+                    if (username === storedUsername && password === storedPassword && userIp === storedIp) {
+                        window.location.href = 'home.html'; // Redirect to the home page after successful login
+                    } else {
+                        alert('Invalid credentials or IP address!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error reading db.txt:', error);
+                    alert('There was an error with the login. Please try again.');
+                });
+
+            return false; // Prevent the default form submission
+        }
     </script>
+
+    <div class="copyright">&copy; 2025 Sins VPN. All rights reserved.</div>
 </body>
 </html>
