@@ -1,25 +1,54 @@
-<form id="contact-form">
-    <input type="email" name="email" placeholder="Your email" required />
+<form action="https://formspree.io/f/yourformid" method="POST" id="contact-form">
+    <h2>Contact Me</h2>
+    <input type="email" name="email" placeholder="Your Email" required />
     <input type="text" name="subject" placeholder="Subject" required />
-    <textarea name="message" placeholder="Your message" required></textarea>
-    <button type="submit">Send</button>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
 </form>
 
-<script>
-    document.getElementById("contact-form").addEventListener("submit", async (event) => {
-        event.preventDefault();
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #0f0f0f;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    form {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+    input, textarea {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        font-size: 16px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: black;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: white;
+        color: black;
+    }
+</style>
 
-        const formData = new FormData(event.target);
-        const response = await fetch("/api/send-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Object.fromEntries(formData))
-        });
-
-        if (response.ok) {
-            alert("Email sent!");
-        } else {
-            alert("Failed to send email.");
-        }
-    });
-</script>
